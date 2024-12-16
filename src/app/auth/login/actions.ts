@@ -14,13 +14,13 @@ export const loginAction = actionClient
 		const { email, password } = parsedInput;
 
 		const identifier = `login_${email}`;
-		const { success, reset, remaining } = await loginLimiter.limit(identifier);
+		const { success, reset } = await loginLimiter.limit(identifier);
 
 		if (!success) {
 			const minutes = Math.ceil((reset - Date.now()) / 1000 / 60);
 			return returnValidationErrors(loginSchema, {
 				_errors: [
-					`Terlalu banyak percobaan login. Silakan coba lagi dalam ${minutes} menit. Sisa percobaan: ${remaining}`,
+					`Terlalu banyak percobaan login. Silakan coba lagi dalam ${minutes} menit. `,
 				],
 			});
 		}

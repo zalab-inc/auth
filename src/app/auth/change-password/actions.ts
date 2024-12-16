@@ -5,14 +5,29 @@ import { prisma } from "@/lib/prisma";
 import { returnValidationErrors } from "next-safe-action";
 import { VerificationType } from "@prisma/client";
 import { hash } from "bcrypt-ts";
+import { passwordResetLimiter } from "@/lib/rate-limit";
 
 export const changePasswordAction = actionClient
 	.schema(changePasswordSchema)
 	.action(async ({ parsedInput }) => {
-		const { token, password } = parsedInput;
+		const { token, password, userId } = parsedInput;
+
+		// Rate limit password change attempts per user
+		const identifier = `password_change_${userId}`;
+		const { success, reset, remaining } =
+			await passwordResetLimiter.limit(identifier);
+
+		if (!success) {
+			const minutes = Math.ceil((reset - Date.now()) / 1000 / 60);
+			return returnValidationErrors(changePasswordSchema, {
+				_errors: [
+					`Terlalu banyak percobaan mengubah password. Silakan coba lagi dalam ${minutes} menit.`,
+				],
+			});
+		}
 
 		// Find verification record with matching token2
-		const verification = await prisma.verification.findFirst({
+		const user = await prisma.verification.findFirst({
 			where: {
 				token,
 				type: VerificationType.RESET_PASSWORD,
@@ -26,7 +41,7 @@ export const changePasswordAction = actionClient
 			},
 		});
 
-		if (!verification) {
+		if (!user) {
 			return returnValidationErrors(changePasswordSchema, {
 				_errors: ["Token tidak valid atau sudah kedaluwarsa"],
 			});
@@ -38,15 +53,16 @@ export const changePasswordAction = actionClient
 		// Update user password and delete verification
 		await prisma.$transaction([
 			prisma.user.update({
-				where: { id: verification.userId },
+				where: { id: user.userId },
 				data: { password: hashedPassword },
 			}),
 			prisma.verification.delete({
-				where: { id: verification.id },
+				where: { id: user.id },
 			}),
 		]);
 
 		return {
-			message: "Kata sandi berhasil diubah",
+			success: true,
+			remaining,
 		};
 	});

@@ -24,7 +24,6 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
-import { GoogleLogo } from "@/app/auth/_components/google-logo";
 import { ErrorMessage } from "@/app/auth/_components/error-message";
 import { resetPasswordAction } from "./actions";
 import { resetPasswordSchema } from "./schema";
@@ -43,9 +42,6 @@ export function ResetForm() {
 			actionProps: {
 				onSuccess: () => {
 					setIsSuccess(true);
-					toast.success(
-						"Instruksi reset kata sandi telah dikirim ke email Anda",
-					);
 				},
 				onError: ({ error }) => {
 					const serverError = error?.serverError;
@@ -94,7 +90,7 @@ export function ResetForm() {
 												<Input
 													id="email"
 													type="email"
-													placeholder=""
+													placeholder="email@anda.com"
 													{...field}
 												/>
 											</FormControl>

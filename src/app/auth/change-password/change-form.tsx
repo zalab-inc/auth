@@ -24,16 +24,16 @@ import {
 import Link from "next/link";
 import { ErrorMessage } from "@/app/auth/_components/error-message";
 import { changePasswordAction } from "./actions";
-import { changePasswordSchema } from "./schema";
+import { changePasswordSchema, type ChangePasswordType } from "./schema";
 import { SuccessDialog } from "./success-dialog";
 import { InputPassword } from "@/components/shared/input-password";
 
-interface ResetFormProps {
-	verificationId: string;
+interface ChangeFormProps {
+	userId: string;
 	token: string;
 }
 
-export function ResetForm({ verificationId, token }: ResetFormProps) {
+export function ChangeForm({ token, userId }: ChangeFormProps) {
 	const [isSuccess, setIsSuccess] = useState(false);
 	const { form, handleSubmitWithAction } = useHookFormAction(
 		changePasswordAction,
@@ -42,6 +42,7 @@ export function ResetForm({ verificationId, token }: ResetFormProps) {
 			formProps: {
 				defaultValues: {
 					token,
+					userId,
 					password: "",
 					confirmPassword: "",
 				},
@@ -49,7 +50,6 @@ export function ResetForm({ verificationId, token }: ResetFormProps) {
 			actionProps: {
 				onSuccess: () => {
 					setIsSuccess(true);
-					toast.success("Kata sandi berhasil diubah");
 				},
 				onError: ({ error }) => {
 					const serverError = error?.serverError;
@@ -84,6 +84,8 @@ export function ResetForm({ verificationId, token }: ResetFormProps) {
 				<CardContent>
 					<Form {...form}>
 						<form onSubmit={handleSubmitWithAction} className="grid gap-6">
+							<input type="hidden" name="token" value={token} />
+							<input type="hidden" name="userId" value={userId} />
 							<div className="grid gap-6">
 								<FormField
 									control={form.control}

@@ -11,17 +11,13 @@ import {
 import Link from "next/link";
 
 interface ErrorDialogProps {
-	children: React.ReactNode;
-	title?: string;
-	actionText?: string;
-	actionHref?: string;
+	title: string;
+	description: string;
 }
 
 export function ErrorDialog({
-	children,
-	title = "Error Occurred",
-	actionText = "Try Password Reset Again",
-	actionHref = "/auth/reset-password",
+	title = "Terjadi Kesalahan",
+	description = "Terjadi kesalahan saat memproses permintaan Anda",
 }: ErrorDialogProps) {
 	return (
 		<div
@@ -35,13 +31,17 @@ export function ErrorDialog({
 					<CardTitle id="error-title" className="text-xl">
 						{title}
 					</CardTitle>
-					<CardDescription className="mt-2">{children}</CardDescription>
+					<CardDescription className="mt-2">{description}</CardDescription>
 				</CardHeader>
 				<CardContent>
 					<div className="grid gap-6">
-						<Link href={actionHref} className="w-full">
-							<Button className="w-full" aria-label={actionText} type="button">
-								{actionText}
+						<Link href="/auth/reset-password" className="w-full">
+							<Button
+								className="w-full"
+								aria-label="Coba Reset Password Lagi"
+								type="button"
+							>
+								Reset Password
 							</Button>
 						</Link>
 					</div>

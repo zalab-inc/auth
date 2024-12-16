@@ -15,11 +15,12 @@ export function SuccessDialog() {
 		<div className="w-full max-w-sm mx-auto flex flex-col gap-6">
 			<Card className="w-full">
 				<CardHeader className="text-center">
-					<CardTitle className="text-xl">Periksa Email Anda</CardTitle>
+					<CardTitle className="text-xl">
+						Berhasil Mengubah Kata Sandi
+					</CardTitle>
 					<CardDescription>
-						Kami telah mengirimkan link untuk mengubah kata sandi ke email Anda.
-						Silakan periksa kotak masuk atau folder spam Anda untuk melanjutkan
-						proses reset kata sandi.
+						Kata sandi Anda berhasil diubah. Silakan login menggunakan kata
+						sandi baru Anda.
 					</CardDescription>
 				</CardHeader>
 				<CardContent>
