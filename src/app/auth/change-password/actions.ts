@@ -11,7 +11,7 @@ export const changePasswordAction = actionClient
 	.action(async ({ parsedInput }) => {
 		const { token, password } = parsedInput;
 
-		// Find verification record with matching token
+		// Find verification record with matching token2
 		const verification = await prisma.verification.findFirst({
 			where: {
 				token,
