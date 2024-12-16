@@ -1,0 +1,3 @@
+Create refactor task for react component to improve security, error handling and code organization and performance.
+
+DONT CREATE NEW FILES !

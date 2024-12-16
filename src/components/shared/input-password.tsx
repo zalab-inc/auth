@@ -24,7 +24,7 @@ export const InputPassword = React.forwardRef<
 				ref={ref}
 				type={showPassword ? "text" : "password"}
 				className={cn(
-					"flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
+					"flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 pr-10",
 					props.className,
 				)}
 			/>
@@ -32,7 +32,7 @@ export const InputPassword = React.forwardRef<
 				type="button"
 				variant="ghost"
 				size="icon"
-				className="absolute right-0 top-0 h-10 w-10 rounded-r-md bg-background p-2 hover:bg-muted"
+				className="absolute right-0 top-0 h-10 w-10 rounded-r-md hover:bg-transparent focus:bg-transparent"
 				onClick={togglePasswordVisibility}
 			>
 				{showPassword ? (

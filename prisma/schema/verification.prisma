@@ -1,0 +1,18 @@
+model Verification {
+    id        String           @id @default(cuid())
+    userId    String
+    token     String
+    type      VerificationType
+    expiresAt DateTime
+    usedAt    DateTime?
+    createdAt DateTime         @default(now())
+    updatedAt DateTime         @updatedAt
+
+    @@unique([userId, type])
+    @@index([userId])
+}
+
+enum VerificationType {
+    REGISTER
+    RESET_PASSWORD
+}
