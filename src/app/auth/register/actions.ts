@@ -9,7 +9,7 @@ import { registerLimiter } from "@/lib/rate-limit";
 export const registerAction = actionClient
 	.schema(loginSchema)
 	.action(async ({ parsedInput }) => {
-		const { email, password, name } = parsedInput;
+		const { email, password } = parsedInput;
 
 		// Check rate limit for registration attempts
 		const identifier = `register_${email}`;
@@ -43,7 +43,6 @@ export const registerAction = actionClient
 			data: {
 				email,
 				password: hashedPassword,
-				name,
 				isVerified: false,
 			},
 		});

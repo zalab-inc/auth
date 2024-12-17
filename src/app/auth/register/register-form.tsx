@@ -37,7 +37,6 @@ export function RegisterForm() {
 		{
 			formProps: {
 				defaultValues: {
-					name: "",
 					email: "",
 					password: "",
 				},
@@ -105,24 +104,6 @@ export function RegisterForm() {
 												<Input
 													id="email"
 													type="email"
-													placeholder=""
-													{...field}
-												/>
-											</FormControl>
-											<FormMessage />
-										</FormItem>
-									)}
-								/>
-								<FormField
-									control={form.control}
-									name="name"
-									render={({ field }) => (
-										<FormItem className="grid gap-0">
-											<FormLabel htmlFor="name">Nama</FormLabel>
-											<FormControl>
-												<Input
-													id="name"
-													type="text"
 													placeholder=""
 													{...field}
 												/>
