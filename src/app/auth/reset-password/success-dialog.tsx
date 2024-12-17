@@ -17,9 +17,8 @@ export function SuccessDialog() {
 				<CardHeader className="text-center">
 					<CardTitle className="text-xl">Periksa Email Anda</CardTitle>
 					<CardDescription>
-						Kami telah mengirimkan link untuk mengubah kata sandi ke email Anda.
-						Silakan periksa kotak masuk atau folder spam Anda untuk melanjutkan
-						proses reset kata sandi.
+						Silakan periksa kotak masuk atau folder spam untuk link reset kata
+						sandi yang telah kami kirimkan.
 					</CardDescription>
 				</CardHeader>
 				<CardContent>

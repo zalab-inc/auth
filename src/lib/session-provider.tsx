@@ -9,28 +9,36 @@ const defaultSession: SessionData = {
 	email: undefined,
 };
 
-const SessionContext = createContext<SessionData>(defaultSession);
+interface SessionContextProps {
+	session: SessionData;
+}
+
+const SessionContext = createContext<SessionContextProps>({
+	session: defaultSession,
+});
 
 export function useSession() {
-	return useContext(SessionContext);
+	const { session } = useContext(SessionContext);
+	return session;
+}
+
+interface SessionProviderProps {
+	children: React.ReactNode;
+	initialSession?: SessionData;
 }
 
 export function SessionProvider({
 	children,
 	initialSession = defaultSession,
-}: {
-	children: React.ReactNode;
-	initialSession: SessionData;
-}) {
-	// Ensure we're working with a plain object
-	const sessionValue: SessionData = {
-		isLoggedIn: !!initialSession.isLoggedIn,
-		userId: initialSession.userId || undefined,
-		email: initialSession.email || undefined,
+}: SessionProviderProps) {
+	const session: SessionData = {
+		isLoggedIn: Boolean(initialSession.isLoggedIn),
+		userId: initialSession.userId ?? undefined,
+		email: initialSession.email ?? undefined,
 	};
 
 	return (
-		<SessionContext.Provider value={sessionValue}>
+		<SessionContext.Provider value={{ session }}>
 			{children}
 		</SessionContext.Provider>
 	);
