@@ -15,26 +15,26 @@ const redis = new Redis({
 	token: process.env.UPSTASH_REDIS_REST_TOKEN,
 });
 
-// Password reset: 1 attempts per 5 minutes
+// Password reset: 5 attempts per 5 minutes
 export const passwordResetLimiter = new Ratelimit({
 	redis,
-	limiter: Ratelimit.slidingWindow(1, "5 m"),
+	limiter: Ratelimit.slidingWindow(5, "5 m"),
 	analytics: true,
 	prefix: "password_reset",
 });
 
-// Login: 1 attempts per 5 minutes
+// Login: 5 attempts per 5 minutes
 export const loginLimiter = new Ratelimit({
 	redis,
-	limiter: Ratelimit.slidingWindow(1, "5 m"),
+	limiter: Ratelimit.slidingWindow(5, "5 m"),
 	analytics: true,
 	prefix: "login",
 });
 
-// Register: 1 attempts per 5 minutes
+// Register: 5 attempts per 5 minutes
 export const registerLimiter = new Ratelimit({
 	redis,
-	limiter: Ratelimit.slidingWindow(1, "5 m"),
+	limiter: Ratelimit.slidingWindow(5, "5 m"),
 	analytics: true,
 	prefix: "register",
 });

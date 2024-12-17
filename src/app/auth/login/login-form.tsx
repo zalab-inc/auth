@@ -22,13 +22,14 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
-import { GoogleLogo } from "@/app/auth/_components/google-logo";
+import { GoogleLogo } from "@/components/shared/google-logo";
 import { ErrorMessage } from "@/app/auth/_components/error-message";
 import { loginAction } from "./actions";
 import { loginSchema } from "./schema";
 import { InputPassword } from "@/components/shared/input-password";
 import { useState } from "react";
 import { Loader } from "@/components/shared/loader";
+
 export function LoginForm() {
 	const [isSuccess, setIsSuccess] = useState(false);
 	const { form, handleSubmitWithAction } = useHookFormAction(
