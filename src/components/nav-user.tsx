@@ -10,7 +10,6 @@ import {
 	User,
 } from "lucide-react";
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
 	DropdownMenu,
 	DropdownMenuContent,
@@ -29,15 +28,7 @@ import {
 import { logoutAction } from "@/app/auth/login/actions";
 import { useSession } from "@/lib/session-provider";
 
-export function NavUser({
-	user,
-}: {
-	user: {
-		name: string;
-		email: string;
-		avatar: string;
-	};
-}) {
+export function NavUser() {
 	const { isMobile } = useSidebar();
 	const session = useSession();
 

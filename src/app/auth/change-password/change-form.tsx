@@ -24,7 +24,7 @@ import {
 import Link from "next/link";
 import { ErrorMessage } from "@/app/auth/_components/error-message";
 import { changePasswordAction } from "./actions";
-import { changePasswordSchema, type ChangePasswordType } from "./schema";
+import { changePasswordSchema } from "./schema";
 import { SuccessDialog } from "./success-dialog";
 import { InputPassword } from "@/components/shared/input-password";
 

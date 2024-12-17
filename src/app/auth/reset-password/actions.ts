@@ -1,13 +1,13 @@
 "use server";
 
-import { resetPasswordSchema } from "./schema";
-import { actionClient } from "@/lib/safe-action";
 import { prisma } from "@/lib/prisma";
-import { returnValidationErrors } from "next-safe-action";
+import { passwordResetLimiter } from "@/lib/rate-limit";
+import { actionClient } from "@/lib/safe-action";
+import { sendPasswordResetEmail } from "@/lib/send-email";
 import { VerificationType } from "@prisma/client";
 import { nanoid } from "nanoid";
-import { sendPasswordResetEmail } from "@/lib/send-email";
-import { passwordResetLimiter } from "@/lib/rate-limit";
+import { returnValidationErrors } from "next-safe-action";
+import { resetPasswordSchema } from "./schema";
 
 export const resetPasswordAction = actionClient
 	.schema(resetPasswordSchema)
@@ -71,7 +71,7 @@ export const resetPasswordAction = actionClient
 
 		try {
 			await sendPasswordResetEmail(user.email, token);
-		} catch (error) {
+		} catch {
 			return returnValidationErrors(resetPasswordSchema, {
 				_errors: ["Gagal mengirim email reset password"],
 			});

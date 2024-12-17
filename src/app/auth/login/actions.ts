@@ -1,21 +1,23 @@
 "use server";
-import { loginSchema } from "./schema";
-import { actionClient } from "@/lib/safe-action";
 import { prisma } from "@/lib/prisma";
-import { returnValidationErrors } from "next-safe-action";
-import { compare } from "bcrypt-ts";
-import { getSession } from "@/lib/sessions";
-import { redirect } from "next/navigation";
 import { loginLimiter } from "@/lib/rate-limit";
+import { actionClient } from "@/lib/safe-action";
+import { getSession } from "@/lib/sessions";
+import { compare } from "bcrypt-ts";
+import { returnValidationErrors } from "next-safe-action";
+import { redirect } from "next/navigation";
+import { loginSchema } from "./schema";
 
 export const loginAction = actionClient
 	.schema(loginSchema)
 	.action(async ({ parsedInput }) => {
 		const { email, password } = parsedInput;
 
+		// Rate limit login attempts
 		const identifier = `login_${email}`;
 		const { success, reset } = await loginLimiter.limit(identifier);
 
+		// If rate limit is exceeded, return error message
 		if (!success) {
 			const minutes = Math.ceil((reset - Date.now()) / 1000 / 60);
 			return returnValidationErrors(loginSchema, {

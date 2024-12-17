@@ -20,7 +20,7 @@ export const registerAction = actionClient
 			const minutes = Math.ceil((reset - Date.now()) / 1000 / 60);
 			return returnValidationErrors(loginSchema, {
 				_errors: [
-					`Terlalu banyak percobaan. Silakan coba lagi dalam ${minutes} menit. Sisa percobaan: ${remaining}`,
+					`Terlalu banyak percobaan. Silakan coba lagi dalam ${minutes} menit.`,
 				],
 			});
 		}

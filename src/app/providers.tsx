@@ -1,6 +1,5 @@
 import { getSession } from "@/lib/sessions";
 import { SessionProvider } from "@/lib/session-provider";
-import type { SessionData } from "@/lib/sessions";
 
 export async function ServerSessionProvider({
 	children,

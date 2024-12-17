@@ -1,9 +1,9 @@
 "use client";
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useHookFormAction } from "@next-safe-action/adapter-react-hook-form/hooks";
-import { toast } from "sonner";
-import { Loader2 } from "lucide-react";
+import { ErrorMessage } from "@/app/auth/_components/error-message";
+import { SuccessDialog } from "@/app/auth/register/success-dialog";
+import { GoogleLogo } from "@/components/shared/google-logo";
+import { InputPassword } from "@/components/shared/input-password";
 import { Button } from "@/components/ui/button";
 import {
 	Card,
@@ -21,14 +21,14 @@ import {
 	FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useHookFormAction } from "@next-safe-action/adapter-react-hook-form/hooks";
+import { Loader2 } from "lucide-react";
 import Link from "next/link";
-import { GoogleLogo } from "@/components/shared/google-logo";
+import { useState } from "react";
+import { toast } from "sonner";
 import { registerAction } from "./actions";
 import { loginSchema } from "./schema";
-import { ErrorMessage } from "@/app/auth/_components/error-message";
-import { InputPassword } from "@/components/shared/input-password";
-import { useState } from "react";
-import { SuccessDialog } from "@/app/auth/register/success-dialog";
 
 export function RegisterForm() {
 	const { form, handleSubmitWithAction } = useHookFormAction(
