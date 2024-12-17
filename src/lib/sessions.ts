@@ -1,6 +1,7 @@
 import type { SessionOptions } from "iron-session";
 import { cookies } from "next/headers";
 import { getIronSession } from "iron-session";
+
 export interface SessionData {
 	userId?: string;
 	email?: string;
