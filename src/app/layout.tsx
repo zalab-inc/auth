@@ -3,6 +3,7 @@ import { inter } from "@/lib/fonts";
 import { Toaster } from "@/components/ui/sonner";
 import NextTopLoader from "nextjs-toploader";
 import "./globals.css";
+import { ServerSessionProvider } from "@/app/providers";
 
 export const metadata: Metadata = {
 	title: "Create Next App",
@@ -18,7 +19,7 @@ export default function RootLayout({
 		<html lang="en">
 			<body className={`${inter.className} antialiased`}>
 				<NextTopLoader color="#333" />
-				{children}
+				<ServerSessionProvider>{children}</ServerSessionProvider>
 				<Toaster position="top-right" duration={3000} closeButton richColors />
 			</body>
 		</html>
