@@ -132,11 +132,6 @@ export function ResetForm() {
 					</Form>
 				</CardContent>
 			</Card>
-			<div className="text-balance text-center text-xs text-muted-foreground [&_a]:underline [&_a]:underline-offset-4 [&_a]:hover:text-primary  ">
-				Dengan mengklik lanjutkan, Anda menyetujui{" "}
-				<Link href="#">Ketentuan Layanan</Link> dan{" "}
-				<Link href="#">Kebijakan Privasi</Link> kami.
-			</div>
 		</div>
 	);
 }
