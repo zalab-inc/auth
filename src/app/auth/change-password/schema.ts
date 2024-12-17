@@ -6,7 +6,11 @@ export const changePasswordSchema = z
 		userId: z.string().min(1, "User ID tidak boleh kosong"),
 		password: z
 			.string()
-			.min(8, "Kata sandi harus terdiri dari 8 karakter atau lebih"),
+			.min(6, "Kata sandi harus terdiri dari 6 karakter atau lebih")
+			.regex(/[A-Z]/, "Kata sandi harus mengandung huruf kapital")
+			.regex(/[a-z]/, "Kata sandi harus mengandung huruf kecil")
+			.regex(/[0-9]/, "Kata sandi harus mengandung angka")
+			.regex(/[^A-Za-z0-9]/, "Kata sandi harus mengandung karakter khusus"),
 		confirmPassword: z.string(),
 	})
 	.refine((data) => data.password === data.confirmPassword, {
