@@ -28,7 +28,7 @@ export const loginAction = actionClient
 		}
 
 		// Check if user exists with provided email
-		const user = await prisma.user.findFirst({
+		const user = await prisma.user.findUnique({
 			where: {
 				email: email,
 			},

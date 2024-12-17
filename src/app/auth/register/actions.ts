@@ -43,7 +43,6 @@ export const registerAction = actionClient
 			data: {
 				email,
 				password: hashedPassword,
-				isVerified: false,
 			},
 		});
 
